@@ -3,7 +3,6 @@
 ## 1. System Design
 
 **a. Initial design**
-
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
@@ -12,10 +11,20 @@ Three core actions a user should be able to perform are:
 - Create and edit pet care tasks like walks, feeding, medications, and enrichment.
 - Generate and view today's scheduled tasks with priorities and timing clearly displayed.
 
+The initial UML design uses a small domain model aligned to the pet care planning workflow.
+- `Owner` stores the pet owner’s name, preferences, and daily availability. It is responsible for checking whether a task fits the owner's schedule and providing a summary of owner constraints.
+- `Pet` stores the pet’s name, species, age, and care requirements. It is responsible for capturing pet-specific needs and determining whether a task is appropriate for this pet.
+- `Task` represents an individual care item with title, duration, priority, category, and optional recurrence. It is responsible for task-level behavior like determining priority, formatting labels for display, and matching task categories.
+- `Schedule` holds the selected tasks for a day, tracks total duration, and stores explanatory notes. It is responsible for adding/removing tasks, sorting them by time, and producing a summary or explanation of the plan.
+- `Scheduler` uses the owner, pet, and task list to build the daily care plan. It is responsible for filtering tasks by constraints, ranking them by priority, assigning times, generating the final schedule, and validating the result.
+
+
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
+
+During implementation I refined the model based on a review of the class skeleton. I added an explicit `Owner.pets` relationship so the ownership model is clear, and I introduced a `ScheduledItem` class so a `Schedule` can store tasks with assigned start times instead of only raw task objects. This change was made to reduce logic complexity and support real scheduling behavior more naturally.
 
 ---
 

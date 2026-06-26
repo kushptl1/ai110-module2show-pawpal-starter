@@ -10,11 +10,15 @@ class Owner:
     name: str
     preferences: Dict[str, str] = field(default_factory=dict)
     daily_time_budget: int = 0
+    pets: List[Pet] = field(default_factory=list)
 
     def update_preferences(self, pref: Dict[str, str]) -> None:
         pass
 
     def can_schedule(self, duration: int) -> bool:
+        pass
+
+    def add_pet(self, pet: Pet) -> None:
         pass
 
     def summary(self) -> str:
@@ -60,16 +64,28 @@ class Task:
 
 
 @dataclass
+class ScheduledItem:
+    task: Task
+    start_time: str
+
+    def label(self) -> str:
+        pass
+
+    def end_time(self) -> str:
+        pass
+
+
+@dataclass
 class Schedule:
     date: date
-    tasks: List[Task] = field(default_factory=list)
+    items: List[ScheduledItem] = field(default_factory=list)
     total_duration: int = 0
     notes: str = ""
 
-    def add_task(self, task: Task, start_time: str) -> None:
+    def add_task(self, item: ScheduledItem) -> None:
         pass
 
-    def remove_task(self, task: Task) -> None:
+    def remove_task(self, item: ScheduledItem) -> None:
         pass
 
     def sort_by_time(self) -> None:
