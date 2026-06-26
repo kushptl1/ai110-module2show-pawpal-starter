@@ -1,0 +1,62 @@
+classDiagram
+    class Owner {
+        +String name
+        +dict preferences
+        +int daily_time_budget
+        +update_preferences(pref)
+        +can_schedule(duration)
+        +summary()
+    }
+
+    class Pet {
+        +String name
+        +String species
+        +int age
+        +dict care_requirements
+        +update_info(info)
+        +needs_task(task_type)
+        +summary()
+    }
+
+    class Task {
+        +String title
+        +int duration_minutes
+        +String priority
+        +String category
+        +String recurrence
+        +is_high_priority()
+        +format_label()
+        +matches_category(category)
+        +update(details)
+    }
+
+    class Schedule {
+        +date date
+        +List~Task~ tasks
+        +int total_duration
+        +String notes
+        +add_task(task, start_time)
+        +remove_task(task)
+        +sort_by_time()
+        +summary()
+        +explain()
+    }
+
+    class Scheduler {
+        +Owner owner
+        +Pet pet
+        +List~Task~ task_list
+        +dict constraints
+        +generate_schedule()
+        +filter_tasks()
+        +rank_tasks()
+        +assign_times()
+        +validate_schedule()
+    }
+
+    Owner --> Pet : has
+    Owner --> Scheduler
+    Pet --> Scheduler
+    Scheduler --> Task
+    Scheduler --> Schedule
+    Schedule --> Task

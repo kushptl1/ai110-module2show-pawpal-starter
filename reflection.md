@@ -7,6 +7,11 @@
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+Three core actions a user should be able to perform are:
+- Add a pet and owner information so the app can personalize care planning.
+- Create and edit pet care tasks like walks, feeding, medications, and enrichment.
+- Generate and view today's scheduled tasks with priorities and timing clearly displayed.
+
 **b. Design changes**
 
 - Did your design change during implementation?
